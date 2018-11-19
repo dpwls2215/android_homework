@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PhotoActivity">
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="300dp"
+            android:layout_height="275dp"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+                <ImageView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/photo_image"
+                    android:layout_width="300dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/photo_default"/>
+
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/photo_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="left"
+                        android:autoLink="web"
+                        android:textSize="23dp"
+                        android:text="경복궁" />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="280dp"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                tools:context=".PhotoActivity"
+                android:layout_marginTop="20dp">
+
+
+
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주소주소주소"
+                        android:layout_weight=".10"/>
+
+
+                    <fragment
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".80"
+                        class="com.google.android.gms.maps.MapFragment" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/roadbtn"
+                        android:layout_gravity="left"
+                        android:text="길찾기"
+                        android:layout_weight=".10"
+                        />
+            </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

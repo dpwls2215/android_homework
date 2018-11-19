@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_focused="true"
+        android:layout_width="802px"
+        android:layout_height="116px"
+        android:drawable="@drawable/passwordedit_push" />
+    <item
+        android:state_focused="false"
+        android:layout_width="802px"
+        android:layout_height="114px"
+        android:drawable="@drawable/passwordedit" />
+</selector>
