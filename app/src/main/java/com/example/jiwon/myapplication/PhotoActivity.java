@@ -1,15 +1,24 @@
 package com.example.jiwon.myapplication;
 
+import android.Manifest;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -31,7 +41,7 @@ import java.util.Locale;
 
 
 public class PhotoActivity extends AppCompatActivity
-        implements OnMapReadyCallback, View.OnClickListener,GoogleApiClient.ConnectionCallbacks,
+        implements OnMapReadyCallback, View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
@@ -43,6 +53,8 @@ public class PhotoActivity extends AppCompatActivity
     public List<Address> list = null;
     public TextView tv;
     public Geocoder geocoder;
+
+    //현재위치 변수들
 
 
     @Override
@@ -64,11 +76,13 @@ public class PhotoActivity extends AppCompatActivity
 
         change_road();
 
+        //현재위치
+
 
     }
 
     //위도_경도 변환
-    public  void change_road(){
+    public void change_road() {
         try {
 
             list = geocoder.getFromLocation(
@@ -90,7 +104,6 @@ public class PhotoActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public void onMapReady(final GoogleMap map) {
 
@@ -98,16 +111,20 @@ public class PhotoActivity extends AppCompatActivity
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SEOUL);
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+
         map.addMarker(markerOptions);
-        map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        map.animateCamera(CameraUpdateFactory.zoomTo(15));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 15));
     }
 
     @Override
     public void onClick(View view) {
-        String urlplus = "http://maps.google.com/maps?f=d&saddr=출발지주소&daddr="+list.get(0).getAddressLine(0)+"&hl=ko";
+        String urlplus = "http://maps.google.com/maps?f=d&saddr=출발지주소&daddr=" + list.get(0).getAddressLine(0) + "&hl=ko";
         Uri uri = Uri.parse(urlplus);
-        Intent it = new Intent(Intent.ACTION_VIEW,uri);
+        Intent it = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(it);
     }
 
@@ -145,4 +162,11 @@ public class PhotoActivity extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
+
+
+
+
+
 }
