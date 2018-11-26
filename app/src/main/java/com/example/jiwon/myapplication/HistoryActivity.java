@@ -6,6 +6,7 @@ import android.os.Bundle;
 public class HistoryActivity extends AppCompatActivity {
 	
 	public double a;
+	public double b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
