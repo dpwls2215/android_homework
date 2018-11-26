@@ -63,7 +63,7 @@ public class PhotoActivity extends AppCompatActivity
         setContentView(R.layout.activity_photo);
         tv = (TextView) findViewById(R.id.address);
         geocoder = new Geocoder(this);
-        v_pos = 37.553802;
+        v_pos = 37.653802;
         v1_pos = 126.969598;
 
         Roadbtn = (Button) findViewById(R.id.roadbtn);
